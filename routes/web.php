@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\ProductController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/admin', [RegisteredUserController::class, 'index'])
+    ->middleware(['auth']);
+
+Route::get('/product/add', [ProductController::class, 'create'])
+    ->middleware(['auth'])
+    ->name('add.product');
+
+Route::post('/product/add', [ProductController::class, 'store'])
+    ->middleware(['auth']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
