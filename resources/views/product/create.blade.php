@@ -21,6 +21,14 @@
                 <x-input name="p_price" id="p_price" type="text"/>
             </section>
 
+            <section class="mt-5">
+                <select name="tags[]" id="tags" multiple>
+                    @foreach($tags as $tag)
+                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                    @endforeach
+                </select>
+            </section>
+
             <x-button class="mt-5">
                 ADD
             </x-button>
